@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loong.x.app.dao.SysOwnerDao">
+
+    <resultMap type="com.loong.x.app.entity.SysOwner" id="SysOwnerMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="ownerId" column="owner_id" jdbcType="VARCHAR"/>
+        <result property="ownerName" column="owner_name" jdbcType="VARCHAR"/>
+        <result property="ownerNumber" column="owner_number" jdbcType="INTEGER"/>
+        <result property="ownerStatus" column="owner_status" jdbcType="INTEGER"/>
+        <result property="ownerIdCard" column="owner_id_card" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex" jdbcType="VARCHAR"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="purpose" column="purpose" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysOwnerMap">
+        select
+          id, owner_id, owner_name, owner_number, owner_status, owner_id_card, sex, location, purpose, type, create_time, update_time, remark
+        from sys_owner
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysOwnerMap">
+        select
+          id, owner_id, owner_name, owner_number, owner_status, owner_id_card, sex, location, purpose, type, create_time, update_time, remark
+        from sys_owner
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="ownerId != null and ownerId != ''">
+                and owner_id = #{ownerId}
+            </if>
+            <if test="ownerName != null and ownerName != ''">
+                and owner_name = #{ownerName}
+            </if>
+            <if test="ownerNumber != null">
+                and owner_number = #{ownerNumber}
+            </if>
+            <if test="ownerStatus != null">
+                and owner_status = #{ownerStatus}
+            </if>
+            <if test="ownerIdCard != null and ownerIdCard != ''">
+                and owner_id_card = #{ownerIdCard}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="purpose != null and purpose != ''">
+                and purpose = #{purpose}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from sys_owner
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="ownerId != null and ownerId != ''">
+                and owner_id = #{ownerId}
+            </if>
+            <if test="ownerName != null and ownerName != ''">
+                and owner_name = #{ownerName}
+            </if>
+            <if test="ownerNumber != null">
+                and owner_number = #{ownerNumber}
+            </if>
+            <if test="ownerStatus != null">
+                and owner_status = #{ownerStatus}
+            </if>
+            <if test="ownerIdCard != null and ownerIdCard != ''">
+                and owner_id_card = #{ownerIdCard}
+            </if>
+            <if test="sex != null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="purpose != null and purpose != ''">
+                and purpose = #{purpose}
+            </if>
+            <if test="type != null and type != ''">
+                and type = #{type}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_owner(owner_id, owner_name, owner_number, owner_status, owner_id_card, sex, location, purpose, type, create_time, update_time, remark)
+        values (#{ownerId}, #{ownerName}, #{ownerNumber}, #{ownerStatus}, #{ownerIdCard}, #{sex}, #{location}, #{purpose}, #{type}, #{createTime}, #{updateTime}, #{remark})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_owner(owner_id, owner_name, owner_number, owner_status, owner_id_card, sex, location, purpose, type, create_time, update_time, remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.ownerId}, #{entity.ownerName}, #{entity.ownerNumber}, #{entity.ownerStatus}, #{entity.ownerIdCard}, #{entity.sex}, #{entity.location}, #{entity.purpose}, #{entity.type}, #{entity.createTime}, #{entity.updateTime}, #{entity.remark})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_owner(owner_id, owner_name, owner_number, owner_status, owner_id_card, sex, location, purpose, type, create_time, update_time, remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.ownerId}, #{entity.ownerName}, #{entity.ownerNumber}, #{entity.ownerStatus}, #{entity.ownerIdCard}, #{entity.sex}, #{entity.location}, #{entity.purpose}, #{entity.type}, #{entity.createTime}, #{entity.updateTime}, #{entity.remark})
+        </foreach>
+        on duplicate key update
+        owner_id = values(owner_id),
+        owner_name = values(owner_name),
+        owner_number = values(owner_number),
+        owner_status = values(owner_status),
+        owner_id_card = values(owner_id_card),
+        sex = values(sex),
+        location = values(location),
+        purpose = values(purpose),
+        type = values(type),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        remark = values(remark)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_owner
+        <set>
+            <if test="ownerId != null and ownerId != ''">
+                owner_id = #{ownerId},
+            </if>
+            <if test="ownerName != null and ownerName != ''">
+                owner_name = #{ownerName},
+            </if>
+            <if test="ownerNumber != null">
+                owner_number = #{ownerNumber},
+            </if>
+            <if test="ownerStatus != null">
+                owner_status = #{ownerStatus},
+            </if>
+            <if test="ownerIdCard != null and ownerIdCard != ''">
+                owner_id_card = #{ownerIdCard},
+            </if>
+            <if test="sex != null and sex != ''">
+                sex = #{sex},
+            </if>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="purpose != null and purpose != ''">
+                purpose = #{purpose},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_owner where id = #{id}
+    </delete>
+
+</mapper>
+

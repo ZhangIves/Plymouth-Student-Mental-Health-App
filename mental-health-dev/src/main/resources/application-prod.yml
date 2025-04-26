@@ -1,0 +1,5 @@
+#mysql
+spring:
+  profiles: prod
+server:
+  port: 8082

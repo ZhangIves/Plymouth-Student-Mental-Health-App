@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loong.x.app.dao.SysZoneDao">
+
+    <resultMap type="com.loong.x.app.entity.SysZone" id="SysZoneMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="zoneTitle" column="zone_title" jdbcType="VARCHAR"/>
+        <result property="zoneContent" column="zone_content" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="zoneTypeId" column="zone_type_id" jdbcType="INTEGER"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+        <result property="zoneImageUrl" column="zone_image_url" jdbcType="VARCHAR"/>
+        <result property="zoneCapacity" column="zone_capacity" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysZoneMap">
+        select
+          id, zone_title, zone_content, status, zone_type_id, user_id, zone_image_url, zone_capacity, create_time, update_time, remark
+        from sys_zone
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysZoneMap">
+        select
+          id, zone_title, zone_content, status, zone_type_id, user_id, zone_image_url, zone_capacity, create_time, update_time, remark
+        from sys_zone
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="zoneTitle != null and zoneTitle != ''">
+                and zone_title = #{zoneTitle}
+            </if>
+            <if test="zoneContent != null and zoneContent != ''">
+                and zone_content = #{zoneContent}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="zoneTypeId != null">
+                and zone_type_id = #{zoneTypeId}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="zoneImageUrl != null and zoneImageUrl != ''">
+                and zone_image_url = #{zoneImageUrl}
+            </if>
+            <if test="zoneCapacity != null">
+                and zone_capacity = #{zoneCapacity}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from sys_zone
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="zoneTitle != null and zoneTitle != ''">
+                and zone_title = #{zoneTitle}
+            </if>
+            <if test="zoneContent != null and zoneContent != ''">
+                and zone_content = #{zoneContent}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="zoneTypeId != null">
+                and zone_type_id = #{zoneTypeId}
+            </if>
+            <if test="userId != null and userId != ''">
+                and user_id = #{userId}
+            </if>
+            <if test="zoneImageUrl != null and zoneImageUrl != ''">
+                and zone_image_url = #{zoneImageUrl}
+            </if>
+            <if test="zoneCapacity != null">
+                and zone_capacity = #{zoneCapacity}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_zone(zone_title, zone_content, status, zone_type_id, user_id, zone_image_url, zone_capacity, create_time, update_time, remark)
+        values (#{zoneTitle}, #{zoneContent}, #{status}, #{zoneTypeId}, #{userId}, #{zoneImageUrl}, #{zoneCapacity}, #{createTime}, #{updateTime}, #{remark})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_zone(zone_title, zone_content, status, zone_type_id, user_id, zone_image_url, zone_capacity, create_time, update_time, remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.zoneTitle}, #{entity.zoneContent}, #{entity.status}, #{entity.zoneTypeId}, #{entity.userId}, #{entity.zoneImageUrl}, #{entity.zoneCapacity}, #{entity.createTime}, #{entity.updateTime}, #{entity.remark})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_zone(zone_title, zone_content, status, zone_type_id, user_id, zone_image_url, zone_capacity, create_time, update_time, remark)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.zoneTitle}, #{entity.zoneContent}, #{entity.status}, #{entity.zoneTypeId}, #{entity.userId}, #{entity.zoneImageUrl}, #{entity.zoneCapacity}, #{entity.createTime}, #{entity.updateTime}, #{entity.remark})
+        </foreach>
+        on duplicate key update
+        zone_title = values(zone_title),
+        zone_content = values(zone_content),
+        status = values(status),
+        zone_type_id = values(zone_type_id),
+        user_id = values(user_id),
+        zone_image_url = values(zone_image_url),
+        zone_capacity = values(zone_capacity),
+        create_time = values(create_time),
+        update_time = values(update_time),
+        remark = values(remark)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_zone
+        <set>
+            <if test="zoneTitle != null and zoneTitle != ''">
+                zone_title = #{zoneTitle},
+            </if>
+            <if test="zoneContent != null and zoneContent != ''">
+                zone_content = #{zoneContent},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="zoneTypeId != null">
+                zone_type_id = #{zoneTypeId},
+            </if>
+            <if test="userId != null and userId != ''">
+                user_id = #{userId},
+            </if>
+            <if test="zoneImageUrl != null and zoneImageUrl != ''">
+                zone_image_url = #{zoneImageUrl},
+            </if>
+            <if test="zoneCapacity != null">
+                zone_capacity = #{zoneCapacity},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_zone where id = #{id}
+    </delete>
+
+</mapper>
+

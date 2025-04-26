@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loong.x.app.dao.MentalHealthEvaluationDao">
+
+    <resultMap type="com.loong.x.app.entity.MentalHealthEvaluation" id="MentalHealthEvaluationMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="scoreMin" column="score_min" jdbcType="INTEGER"/>
+        <result property="scoreMax" column="score_max" jdbcType="INTEGER"/>
+        <result property="resultLevel" column="result_level" jdbcType="VARCHAR"/>
+        <result property="resultDescription" column="result_description" jdbcType="VARCHAR"/>
+        <result property="dailyAdvice" column="daily_advice" jdbcType="VARCHAR"/>
+        <result property="professionalAdvice" column="professional_advice" jdbcType="VARCHAR"/>
+        <result property="emergencyContact" column="emergency_contact" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="MentalHealthEvaluationMap">
+        select
+          id, score_min, score_max, result_level, result_description, daily_advice, professional_advice, emergency_contact
+        from mental_health_evaluation
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="MentalHealthEvaluationMap">
+        select
+          id, score_min, score_max, result_level, result_description, daily_advice, professional_advice, emergency_contact
+        from mental_health_evaluation
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="scoreMin != null">
+                and score_min = #{scoreMin}
+            </if>
+            <if test="scoreMax != null">
+                and score_max = #{scoreMax}
+            </if>
+            <if test="resultLevel != null and resultLevel != ''">
+                and result_level = #{resultLevel}
+            </if>
+            <if test="resultDescription != null and resultDescription != ''">
+                and result_description = #{resultDescription}
+            </if>
+            <if test="dailyAdvice != null and dailyAdvice != ''">
+                and daily_advice = #{dailyAdvice}
+            </if>
+            <if test="professionalAdvice != null and professionalAdvice != ''">
+                and professional_advice = #{professionalAdvice}
+            </if>
+            <if test="emergencyContact != null and emergencyContact != ''">
+                and emergency_contact = #{emergencyContact}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from mental_health_evaluation
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="scoreMin != null">
+                and score_min = #{scoreMin}
+            </if>
+            <if test="scoreMax != null">
+                and score_max = #{scoreMax}
+            </if>
+            <if test="resultLevel != null and resultLevel != ''">
+                and result_level = #{resultLevel}
+            </if>
+            <if test="resultDescription != null and resultDescription != ''">
+                and result_description = #{resultDescription}
+            </if>
+            <if test="dailyAdvice != null and dailyAdvice != ''">
+                and daily_advice = #{dailyAdvice}
+            </if>
+            <if test="professionalAdvice != null and professionalAdvice != ''">
+                and professional_advice = #{professionalAdvice}
+            </if>
+            <if test="emergencyContact != null and emergencyContact != ''">
+                and emergency_contact = #{emergencyContact}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into mental_health_evaluation(score_min, score_max, result_level, result_description, daily_advice, professional_advice, emergency_contact)
+        values (#{scoreMin}, #{scoreMax}, #{resultLevel}, #{resultDescription}, #{dailyAdvice}, #{professionalAdvice}, #{emergencyContact})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into mental_health_evaluation(score_min, score_max, result_level, result_description, daily_advice, professional_advice, emergency_contact)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.scoreMin}, #{entity.scoreMax}, #{entity.resultLevel}, #{entity.resultDescription}, #{entity.dailyAdvice}, #{entity.professionalAdvice}, #{entity.emergencyContact})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into mental_health_evaluation(score_min, score_max, result_level, result_description, daily_advice, professional_advice, emergency_contact)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.scoreMin}, #{entity.scoreMax}, #{entity.resultLevel}, #{entity.resultDescription}, #{entity.dailyAdvice}, #{entity.professionalAdvice}, #{entity.emergencyContact})
+        </foreach>
+        on duplicate key update
+        score_min = values(score_min),
+        score_max = values(score_max),
+        result_level = values(result_level),
+        result_description = values(result_description),
+        daily_advice = values(daily_advice),
+        professional_advice = values(professional_advice),
+        emergency_contact = values(emergency_contact)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update mental_health_evaluation
+        <set>
+            <if test="scoreMin != null">
+                score_min = #{scoreMin},
+            </if>
+            <if test="scoreMax != null">
+                score_max = #{scoreMax},
+            </if>
+            <if test="resultLevel != null and resultLevel != ''">
+                result_level = #{resultLevel},
+            </if>
+            <if test="resultDescription != null and resultDescription != ''">
+                result_description = #{resultDescription},
+            </if>
+            <if test="dailyAdvice != null and dailyAdvice != ''">
+                daily_advice = #{dailyAdvice},
+            </if>
+            <if test="professionalAdvice != null and professionalAdvice != ''">
+                professional_advice = #{professionalAdvice},
+            </if>
+            <if test="emergencyContact != null and emergencyContact != ''">
+                emergency_contact = #{emergencyContact},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from mental_health_evaluation where id = #{id}
+    </delete>
+
+</mapper>
+

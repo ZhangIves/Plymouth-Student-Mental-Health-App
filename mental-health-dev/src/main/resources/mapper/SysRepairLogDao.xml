@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loong.x.app.dao.SysRepairLogDao">
+
+    <resultMap type="com.loong.x.app.entity.SysRepairLog" id="SysRepairLogMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="location" column="location" jdbcType="VARCHAR"/>
+        <result property="repairUser" column="repair_user" jdbcType="VARCHAR"/>
+        <result property="repairUserId" column="repair_user_id" jdbcType="VARCHAR"/>
+        <result property="phone" column="phone" jdbcType="VARCHAR"/>
+        <result property="rapairName" column="rapair_name" jdbcType="VARCHAR"/>
+        <result property="remark" column="remark" jdbcType="VARCHAR"/>
+        <result property="reservationDate" column="reservation_date" jdbcType="TIMESTAMP"/>
+        <result property="reservationStartTime" column="reservation_start_time" jdbcType="VARCHAR"/>
+        <result property="reservationEndTime" column="reservation_end_time" jdbcType="VARCHAR"/>
+        <result property="reservationTime" column="reservation_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="INTEGER"/>
+        <result property="repairStatus" column="repair_status" jdbcType="VARCHAR"/>
+        <result property="isDoor" column="is_door" jdbcType="INTEGER"/>
+        <result property="repairImage" column="repair_image" jdbcType="VARCHAR"/>
+        <result property="repairEndImage" column="repair_end_image" jdbcType="VARCHAR"/>
+        <result property="repairEndRemark" column="repair_end_remark" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysRepairLogMap">
+        select
+          id, location, repair_user, repair_user_id, phone, rapair_name, remark, reservation_date, reservation_start_time, reservation_end_time, reservation_time, status, repair_status, is_door, repair_image, repair_end_image, repair_end_remark, create_time, update_time
+        from sys_repair_log
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysRepairLogMap">
+        select
+          id, location, repair_user, repair_user_id, phone, rapair_name, remark, reservation_date, reservation_start_time, reservation_end_time, reservation_time, status, repair_status, is_door, repair_image, repair_end_image, repair_end_remark, create_time, update_time
+        from sys_repair_log
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="repairUser != null and repairUser != ''">
+                and repair_user = #{repairUser}
+            </if>
+            <if test="repairUserId != null and repairUserId != ''">
+                and repair_user_id = #{repairUserId}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="rapairName != null and rapairName != ''">
+                and rapair_name = #{rapairName}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="reservationDate != null">
+                and reservation_date = #{reservationDate}
+            </if>
+            <if test="reservationStartTime != null and reservationStartTime != ''">
+                and reservation_start_time = #{reservationStartTime}
+            </if>
+            <if test="reservationEndTime != null and reservationEndTime != ''">
+                and reservation_end_time = #{reservationEndTime}
+            </if>
+            <if test="reservationTime != null">
+                and reservation_time = #{reservationTime}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="repairStatus != null and repairStatus != ''">
+                and repair_status = #{repairStatus}
+            </if>
+            <if test="isDoor != null">
+                and is_door = #{isDoor}
+            </if>
+            <if test="repairImage != null and repairImage != ''">
+                and repair_image = #{repairImage}
+            </if>
+            <if test="repairEndImage != null and repairEndImage != ''">
+                and repair_end_image = #{repairEndImage}
+            </if>
+            <if test="repairEndRemark != null and repairEndRemark != ''">
+                and repair_end_remark = #{repairEndRemark}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from sys_repair_log
+        <where>
+            <if test="id != null">
+                and id = #{id}
+            </if>
+            <if test="location != null and location != ''">
+                and location = #{location}
+            </if>
+            <if test="repairUser != null and repairUser != ''">
+                and repair_user = #{repairUser}
+            </if>
+            <if test="repairUserId != null and repairUserId != ''">
+                and repair_user_id = #{repairUserId}
+            </if>
+            <if test="phone != null and phone != ''">
+                and phone = #{phone}
+            </if>
+            <if test="rapairName != null and rapairName != ''">
+                and rapair_name = #{rapairName}
+            </if>
+            <if test="remark != null and remark != ''">
+                and remark = #{remark}
+            </if>
+            <if test="reservationDate != null">
+                and reservation_date = #{reservationDate}
+            </if>
+            <if test="reservationStartTime != null and reservationStartTime != ''">
+                and reservation_start_time = #{reservationStartTime}
+            </if>
+            <if test="reservationEndTime != null and reservationEndTime != ''">
+                and reservation_end_time = #{reservationEndTime}
+            </if>
+            <if test="reservationTime != null">
+                and reservation_time = #{reservationTime}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+            <if test="repairStatus != null and repairStatus != ''">
+                and repair_status = #{repairStatus}
+            </if>
+            <if test="isDoor != null">
+                and is_door = #{isDoor}
+            </if>
+            <if test="repairImage != null and repairImage != ''">
+                and repair_image = #{repairImage}
+            </if>
+            <if test="repairEndImage != null and repairEndImage != ''">
+                and repair_end_image = #{repairEndImage}
+            </if>
+            <if test="repairEndRemark != null and repairEndRemark != ''">
+                and repair_end_remark = #{repairEndRemark}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_repair_log(location, repair_user, repair_user_id, phone, rapair_name, remark, reservation_date, reservation_start_time, reservation_end_time, reservation_time, status, repair_status, is_door, repair_image, repair_end_image, repair_end_remark, create_time, update_time)
+        values (#{location}, #{repairUser}, #{repairUserId}, #{phone}, #{rapairName}, #{remark}, #{reservationDate}, #{reservationStartTime}, #{reservationEndTime}, #{reservationTime}, #{status}, #{repairStatus}, #{isDoor}, #{repairImage}, #{repairEndImage}, #{repairEndRemark}, #{createTime}, #{updateTime})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_repair_log(location, repair_user, repair_user_id, phone, rapair_name, remark, reservation_date, reservation_start_time, reservation_end_time, reservation_time, status, repair_status, is_door, repair_image, repair_end_image, repair_end_remark, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.location}, #{entity.repairUser}, #{entity.repairUserId}, #{entity.phone}, #{entity.rapairName}, #{entity.remark}, #{entity.reservationDate}, #{entity.reservationStartTime}, #{entity.reservationEndTime}, #{entity.reservationTime}, #{entity.status}, #{entity.repairStatus}, #{entity.isDoor}, #{entity.repairImage}, #{entity.repairEndImage}, #{entity.repairEndRemark}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_repair_log(location, repair_user, repair_user_id, phone, rapair_name, remark, reservation_date, reservation_start_time, reservation_end_time, reservation_time, status, repair_status, is_door, repair_image, repair_end_image, repair_end_remark, create_time, update_time)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.location}, #{entity.repairUser}, #{entity.repairUserId}, #{entity.phone}, #{entity.rapairName}, #{entity.remark}, #{entity.reservationDate}, #{entity.reservationStartTime}, #{entity.reservationEndTime}, #{entity.reservationTime}, #{entity.status}, #{entity.repairStatus}, #{entity.isDoor}, #{entity.repairImage}, #{entity.repairEndImage}, #{entity.repairEndRemark}, #{entity.createTime}, #{entity.updateTime})
+        </foreach>
+        on duplicate key update
+        location = values(location),
+        repair_user = values(repair_user),
+        repair_user_id = values(repair_user_id),
+        phone = values(phone),
+        rapair_name = values(rapair_name),
+        remark = values(remark),
+        reservation_date = values(reservation_date),
+        reservation_start_time = values(reservation_start_time),
+        reservation_end_time = values(reservation_end_time),
+        reservation_time = values(reservation_time),
+        status = values(status),
+        repair_status = values(repair_status),
+        is_door = values(is_door),
+        repair_image = values(repair_image),
+        repair_end_image = values(repair_end_image),
+        repair_end_remark = values(repair_end_remark),
+        create_time = values(create_time),
+        update_time = values(update_time)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_repair_log
+        <set>
+            <if test="location != null and location != ''">
+                location = #{location},
+            </if>
+            <if test="repairUser != null and repairUser != ''">
+                repair_user = #{repairUser},
+            </if>
+            <if test="repairUserId != null and repairUserId != ''">
+                repair_user_id = #{repairUserId},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone = #{phone},
+            </if>
+            <if test="rapairName != null and rapairName != ''">
+                rapair_name = #{rapairName},
+            </if>
+            <if test="remark != null and remark != ''">
+                remark = #{remark},
+            </if>
+            <if test="reservationDate != null">
+                reservation_date = #{reservationDate},
+            </if>
+            <if test="reservationStartTime != null and reservationStartTime != ''">
+                reservation_start_time = #{reservationStartTime},
+            </if>
+            <if test="reservationEndTime != null and reservationEndTime != ''">
+                reservation_end_time = #{reservationEndTime},
+            </if>
+            <if test="reservationTime != null">
+                reservation_time = #{reservationTime},
+            </if>
+            <if test="status != null">
+                status = #{status},
+            </if>
+            <if test="repairStatus != null and repairStatus != ''">
+                repair_status = #{repairStatus},
+            </if>
+            <if test="isDoor != null">
+                is_door = #{isDoor},
+            </if>
+            <if test="repairImage != null and repairImage != ''">
+                repair_image = #{repairImage},
+            </if>
+            <if test="repairEndImage != null and repairEndImage != ''">
+                repair_end_image = #{repairEndImage},
+            </if>
+            <if test="repairEndRemark != null and repairEndRemark != ''">
+                repair_end_remark = #{repairEndRemark},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_repair_log where id = #{id}
+    </delete>
+
+</mapper>
+

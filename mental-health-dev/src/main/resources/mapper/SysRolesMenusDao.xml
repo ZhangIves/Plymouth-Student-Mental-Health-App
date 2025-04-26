@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.loong.x.app.dao.SysRolesMenusDao">
+
+    <resultMap type="com.loong.x.app.entity.SysRolesMenus" id="SysRolesMenusMap">
+        <result property="id" column="id" jdbcType="VARCHAR"/>
+        <result property="roleId" column="role_id" jdbcType="INTEGER"/>
+        <result property="menu1" column="menu_1" jdbcType="INTEGER"/>
+        <result property="menu2" column="menu_2" jdbcType="INTEGER"/>
+        <result property="menu3" column="menu_3" jdbcType="INTEGER"/>
+        <result property="menu4" column="menu_4" jdbcType="INTEGER"/>
+        <result property="menu5" column="menu_5" jdbcType="INTEGER"/>
+        <result property="menu6" column="menu_6" jdbcType="INTEGER"/>
+        <result property="menu7" column="menu_7" jdbcType="INTEGER"/>
+        <result property="menu8" column="menu_8" jdbcType="INTEGER"/>
+        <result property="menu11" column="menu_11" jdbcType="INTEGER"/>
+        <result property="menu12" column="menu_12" jdbcType="INTEGER"/>
+        <result property="menu13" column="menu_13" jdbcType="INTEGER"/>
+        <result property="menu14" column="menu_14" jdbcType="INTEGER"/>
+        <result property="menu21" column="menu_21" jdbcType="INTEGER"/>
+        <result property="menu22" column="menu_22" jdbcType="INTEGER"/>
+        <result property="menu23" column="menu_23" jdbcType="INTEGER"/>
+        <result property="menu24" column="menu_24" jdbcType="INTEGER"/>
+        <result property="menu31" column="menu_31" jdbcType="INTEGER"/>
+        <result property="menu32" column="menu_32" jdbcType="INTEGER"/>
+        <result property="menu33" column="menu_33" jdbcType="INTEGER"/>
+        <result property="menu34" column="menu_34" jdbcType="INTEGER"/>
+        <result property="menu41" column="menu_41" jdbcType="INTEGER"/>
+        <result property="menu42" column="menu_42" jdbcType="INTEGER"/>
+        <result property="menu43" column="menu_43" jdbcType="INTEGER"/>
+        <result property="menu44" column="menu_44" jdbcType="INTEGER"/>
+        <result property="menu51" column="menu_51" jdbcType="INTEGER"/>
+        <result property="menu52" column="menu_52" jdbcType="INTEGER"/>
+        <result property="menu53" column="menu_53" jdbcType="INTEGER"/>
+        <result property="menu54" column="menu_54" jdbcType="INTEGER"/>
+    </resultMap>
+
+    <!--查询单个-->
+    <select id="queryById" resultMap="SysRolesMenusMap">
+        select
+          id, role_id, menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, menu_7, menu_8, menu_11, menu_12, menu_13, menu_14, menu_21, menu_22, menu_23, menu_24, menu_31, menu_32, menu_33, menu_34, menu_41, menu_42, menu_43, menu_44, menu_51, menu_52, menu_53, menu_54
+        from sys_roles_menus
+        where id = #{id}
+    </select>
+
+    <!--查询指定行数据-->
+    <select id="queryAllByLimit" resultMap="SysRolesMenusMap">
+        select
+          id, role_id, menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, menu_7, menu_8, menu_11, menu_12, menu_13, menu_14, menu_21, menu_22, menu_23, menu_24, menu_31, menu_32, menu_33, menu_34, menu_41, menu_42, menu_43, menu_44, menu_51, menu_52, menu_53, menu_54
+        from sys_roles_menus
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+            <if test="menu1 != null">
+                and menu_1 = #{menu1}
+            </if>
+            <if test="menu2 != null">
+                and menu_2 = #{menu2}
+            </if>
+            <if test="menu3 != null">
+                and menu_3 = #{menu3}
+            </if>
+            <if test="menu4 != null">
+                and menu_4 = #{menu4}
+            </if>
+            <if test="menu5 != null">
+                and menu_5 = #{menu5}
+            </if>
+            <if test="menu6 != null">
+                and menu_6 = #{menu6}
+            </if>
+            <if test="menu7 != null">
+                and menu_7 = #{menu7}
+            </if>
+            <if test="menu8 != null">
+                and menu_8 = #{menu8}
+            </if>
+            <if test="menu11 != null">
+                and menu_11 = #{menu11}
+            </if>
+            <if test="menu12 != null">
+                and menu_12 = #{menu12}
+            </if>
+            <if test="menu13 != null">
+                and menu_13 = #{menu13}
+            </if>
+            <if test="menu14 != null">
+                and menu_14 = #{menu14}
+            </if>
+            <if test="menu21 != null">
+                and menu_21 = #{menu21}
+            </if>
+            <if test="menu22 != null">
+                and menu_22 = #{menu22}
+            </if>
+            <if test="menu23 != null">
+                and menu_23 = #{menu23}
+            </if>
+            <if test="menu24 != null">
+                and menu_24 = #{menu24}
+            </if>
+            <if test="menu31 != null">
+                and menu_31 = #{menu31}
+            </if>
+            <if test="menu32 != null">
+                and menu_32 = #{menu32}
+            </if>
+            <if test="menu33 != null">
+                and menu_33 = #{menu33}
+            </if>
+            <if test="menu34 != null">
+                and menu_34 = #{menu34}
+            </if>
+            <if test="menu41 != null">
+                and menu_41 = #{menu41}
+            </if>
+            <if test="menu42 != null">
+                and menu_42 = #{menu42}
+            </if>
+            <if test="menu43 != null">
+                and menu_43 = #{menu43}
+            </if>
+            <if test="menu44 != null">
+                and menu_44 = #{menu44}
+            </if>
+            <if test="menu51 != null">
+                and menu_51 = #{menu51}
+            </if>
+            <if test="menu52 != null">
+                and menu_52 = #{menu52}
+            </if>
+            <if test="menu53 != null">
+                and menu_53 = #{menu53}
+            </if>
+            <if test="menu54 != null">
+                and menu_54 = #{menu54}
+            </if>
+        </where>
+        limit #{pageable.offset}, #{pageable.pageSize}
+    </select>
+
+    <!--统计总行数-->
+    <select id="count" resultType="java.lang.Long">
+        select count(1)
+        from sys_roles_menus
+        <where>
+            <if test="id != null and id != ''">
+                and id = #{id}
+            </if>
+            <if test="roleId != null">
+                and role_id = #{roleId}
+            </if>
+            <if test="menu1 != null">
+                and menu_1 = #{menu1}
+            </if>
+            <if test="menu2 != null">
+                and menu_2 = #{menu2}
+            </if>
+            <if test="menu3 != null">
+                and menu_3 = #{menu3}
+            </if>
+            <if test="menu4 != null">
+                and menu_4 = #{menu4}
+            </if>
+            <if test="menu5 != null">
+                and menu_5 = #{menu5}
+            </if>
+            <if test="menu6 != null">
+                and menu_6 = #{menu6}
+            </if>
+            <if test="menu7 != null">
+                and menu_7 = #{menu7}
+            </if>
+            <if test="menu8 != null">
+                and menu_8 = #{menu8}
+            </if>
+            <if test="menu11 != null">
+                and menu_11 = #{menu11}
+            </if>
+            <if test="menu12 != null">
+                and menu_12 = #{menu12}
+            </if>
+            <if test="menu13 != null">
+                and menu_13 = #{menu13}
+            </if>
+            <if test="menu14 != null">
+                and menu_14 = #{menu14}
+            </if>
+            <if test="menu21 != null">
+                and menu_21 = #{menu21}
+            </if>
+            <if test="menu22 != null">
+                and menu_22 = #{menu22}
+            </if>
+            <if test="menu23 != null">
+                and menu_23 = #{menu23}
+            </if>
+            <if test="menu24 != null">
+                and menu_24 = #{menu24}
+            </if>
+            <if test="menu31 != null">
+                and menu_31 = #{menu31}
+            </if>
+            <if test="menu32 != null">
+                and menu_32 = #{menu32}
+            </if>
+            <if test="menu33 != null">
+                and menu_33 = #{menu33}
+            </if>
+            <if test="menu34 != null">
+                and menu_34 = #{menu34}
+            </if>
+            <if test="menu41 != null">
+                and menu_41 = #{menu41}
+            </if>
+            <if test="menu42 != null">
+                and menu_42 = #{menu42}
+            </if>
+            <if test="menu43 != null">
+                and menu_43 = #{menu43}
+            </if>
+            <if test="menu44 != null">
+                and menu_44 = #{menu44}
+            </if>
+            <if test="menu51 != null">
+                and menu_51 = #{menu51}
+            </if>
+            <if test="menu52 != null">
+                and menu_52 = #{menu52}
+            </if>
+            <if test="menu53 != null">
+                and menu_53 = #{menu53}
+            </if>
+            <if test="menu54 != null">
+                and menu_54 = #{menu54}
+            </if>
+        </where>
+    </select>
+
+    <!--新增所有列-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_roles_menus(menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, menu_7, menu_8, menu_11, menu_12, menu_13, menu_14, menu_21, menu_22, menu_23, menu_24, menu_31, menu_32, menu_33, menu_34, menu_41, menu_42, menu_43, menu_44, menu_51, menu_52, menu_53, menu_54)
+        values (#{menu1}, #{menu2}, #{menu3}, #{menu4}, #{menu5}, #{menu6}, #{menu7}, #{menu8}, #{menu11}, #{menu12}, #{menu13}, #{menu14}, #{menu21}, #{menu22}, #{menu23}, #{menu24}, #{menu31}, #{menu32}, #{menu33}, #{menu34}, #{menu41}, #{menu42}, #{menu43}, #{menu44}, #{menu51}, #{menu52}, #{menu53}, #{menu54})
+    </insert>
+
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_roles_menus(menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, menu_7, menu_8, menu_11, menu_12, menu_13, menu_14, menu_21, menu_22, menu_23, menu_24, menu_31, menu_32, menu_33, menu_34, menu_41, menu_42, menu_43, menu_44, menu_51, menu_52, menu_53, menu_54)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+        (#{entity.menu1}, #{entity.menu2}, #{entity.menu3}, #{entity.menu4}, #{entity.menu5}, #{entity.menu6}, #{entity.menu7}, #{entity.menu8}, #{entity.menu11}, #{entity.menu12}, #{entity.menu13}, #{entity.menu14}, #{entity.menu21}, #{entity.menu22}, #{entity.menu23}, #{entity.menu24}, #{entity.menu31}, #{entity.menu32}, #{entity.menu33}, #{entity.menu34}, #{entity.menu41}, #{entity.menu42}, #{entity.menu43}, #{entity.menu44}, #{entity.menu51}, #{entity.menu52}, #{entity.menu53}, #{entity.menu54})
+        </foreach>
+    </insert>
+
+    <insert id="insertOrUpdateBatch" keyProperty="id" useGeneratedKeys="true">
+        insert into sys_roles_menus(menu_1, menu_2, menu_3, menu_4, menu_5, menu_6, menu_7, menu_8, menu_11, menu_12, menu_13, menu_14, menu_21, menu_22, menu_23, menu_24, menu_31, menu_32, menu_33, menu_34, menu_41, menu_42, menu_43, menu_44, menu_51, menu_52, menu_53, menu_54)
+        values
+        <foreach collection="entities" item="entity" separator=",">
+            (#{entity.menu1}, #{entity.menu2}, #{entity.menu3}, #{entity.menu4}, #{entity.menu5}, #{entity.menu6}, #{entity.menu7}, #{entity.menu8}, #{entity.menu11}, #{entity.menu12}, #{entity.menu13}, #{entity.menu14}, #{entity.menu21}, #{entity.menu22}, #{entity.menu23}, #{entity.menu24}, #{entity.menu31}, #{entity.menu32}, #{entity.menu33}, #{entity.menu34}, #{entity.menu41}, #{entity.menu42}, #{entity.menu43}, #{entity.menu44}, #{entity.menu51}, #{entity.menu52}, #{entity.menu53}, #{entity.menu54})
+        </foreach>
+        on duplicate key update
+        menu_1 = values(menu_1),
+        menu_2 = values(menu_2),
+        menu_3 = values(menu_3),
+        menu_4 = values(menu_4),
+        menu_5 = values(menu_5),
+        menu_6 = values(menu_6),
+        menu_7 = values(menu_7),
+        menu_8 = values(menu_8),
+        menu_11 = values(menu_11),
+        menu_12 = values(menu_12),
+        menu_13 = values(menu_13),
+        menu_14 = values(menu_14),
+        menu_21 = values(menu_21),
+        menu_22 = values(menu_22),
+        menu_23 = values(menu_23),
+        menu_24 = values(menu_24),
+        menu_31 = values(menu_31),
+        menu_32 = values(menu_32),
+        menu_33 = values(menu_33),
+        menu_34 = values(menu_34),
+        menu_41 = values(menu_41),
+        menu_42 = values(menu_42),
+        menu_43 = values(menu_43),
+        menu_44 = values(menu_44),
+        menu_51 = values(menu_51),
+        menu_52 = values(menu_52),
+        menu_53 = values(menu_53),
+        menu_54 = values(menu_54)
+    </insert>
+
+    <!--通过主键修改数据-->
+    <update id="update">
+        update sys_roles_menus
+        <set>
+            <if test="menu1 != null">
+                menu_1 = #{menu1},
+            </if>
+            <if test="menu2 != null">
+                menu_2 = #{menu2},
+            </if>
+            <if test="menu3 != null">
+                menu_3 = #{menu3},
+            </if>
+            <if test="menu4 != null">
+                menu_4 = #{menu4},
+            </if>
+            <if test="menu5 != null">
+                menu_5 = #{menu5},
+            </if>
+            <if test="menu6 != null">
+                menu_6 = #{menu6},
+            </if>
+            <if test="menu7 != null">
+                menu_7 = #{menu7},
+            </if>
+            <if test="menu8 != null">
+                menu_8 = #{menu8},
+            </if>
+            <if test="menu11 != null">
+                menu_11 = #{menu11},
+            </if>
+            <if test="menu12 != null">
+                menu_12 = #{menu12},
+            </if>
+            <if test="menu13 != null">
+                menu_13 = #{menu13},
+            </if>
+            <if test="menu14 != null">
+                menu_14 = #{menu14},
+            </if>
+            <if test="menu21 != null">
+                menu_21 = #{menu21},
+            </if>
+            <if test="menu22 != null">
+                menu_22 = #{menu22},
+            </if>
+            <if test="menu23 != null">
+                menu_23 = #{menu23},
+            </if>
+            <if test="menu24 != null">
+                menu_24 = #{menu24},
+            </if>
+            <if test="menu31 != null">
+                menu_31 = #{menu31},
+            </if>
+            <if test="menu32 != null">
+                menu_32 = #{menu32},
+            </if>
+            <if test="menu33 != null">
+                menu_33 = #{menu33},
+            </if>
+            <if test="menu34 != null">
+                menu_34 = #{menu34},
+            </if>
+            <if test="menu41 != null">
+                menu_41 = #{menu41},
+            </if>
+            <if test="menu42 != null">
+                menu_42 = #{menu42},
+            </if>
+            <if test="menu43 != null">
+                menu_43 = #{menu43},
+            </if>
+            <if test="menu44 != null">
+                menu_44 = #{menu44},
+            </if>
+            <if test="menu51 != null">
+                menu_51 = #{menu51},
+            </if>
+            <if test="menu52 != null">
+                menu_52 = #{menu52},
+            </if>
+            <if test="menu53 != null">
+                menu_53 = #{menu53},
+            </if>
+            <if test="menu54 != null">
+                menu_54 = #{menu54},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--通过主键删除-->
+    <delete id="deleteById">
+        delete from sys_roles_menus where id = #{id}
+    </delete>
+
+</mapper>
+

@@ -1,0 +1,48 @@
+server:
+  port: 8091
+
+spring:
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  servlet:
+    multipart:
+      max-file-size: 100MB
+#    time-zone: Asia/Shanghai
+  web:
+    resources:
+      static-locations:
+        - classpath:/static/
+        - file:/${pictureFile.path}/static/
+
+# 文件存储路径
+pictureFile:
+  path: "E:/W/code/fitness/llxx-dev/target"
+#  path: "E:/W/code/fitness/llxx-dev/src/main/resources/static/uploadImages/"
+  path-mapping: "/static/uploadImages/"
+
+#resources:
+#  static-locations: classpath:/META-INF/resources/,classpath:/resources/,classpath:/static/,classpath:/public/,file:${pictureFile.path-mapping}
+
+
+file:
+  mac:
+    path: ~/file/
+    avatar: ~/avatar/
+  linux:
+    path: /home/eladmin/file/
+    avatar: /home/eladmin/avatar/
+  windows:
+    path: C:\eladmin\file\
+    avatar: C:\eladmin\avatar\
+  # 文件大小 /M
+  maxSize: 100
+  avatarMaxSize: 5
+
+
+# 关于微信的配置
+weixin:
+  official:
+    appId: wx12312415
+website:
+    url:
